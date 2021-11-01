@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HW01_CAR_RACE">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity_Panel"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
