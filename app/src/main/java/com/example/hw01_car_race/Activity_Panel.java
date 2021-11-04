@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,8 +18,8 @@ public class Activity_Panel extends AppCompatActivity {
     private ImageView panel_IMG_stone;
     private ImageView[] panel_IMG_hearts;
     private TextView panel_LBL_score;
-    private Button panel_BTN_right;
-    private Button panel_BTN_left;
+    private ImageButton panel_BTN_right;
+    private ImageButton panel_BTN_left;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,7 @@ public class Activity_Panel extends AppCompatActivity {
 
         findViews();
 
-        ImageView demo_IMG_back = findViewById(R.id.demo_IMG_back);
+ //       ImageView demo_IMG_back = findViewById(R.id.demo_IMG_back);
       /*  Glide
                 .with(this)
                 .load(R.drawable.img_background)
@@ -89,5 +90,5 @@ public class Activity_Panel extends AppCompatActivity {
             }
         }
     }
-
+}
 
