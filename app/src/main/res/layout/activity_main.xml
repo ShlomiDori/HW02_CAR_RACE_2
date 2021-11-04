@@ -157,7 +157,6 @@
                 android:id="@+id/demo_IMG_31"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:layout_weight="1"
                 android:src="@drawable/img_rock" />
 
@@ -189,7 +188,7 @@
                 android:id="@+id/imageView2"
                 android:layout_width="20dp"
                 android:layout_height="86dp"
-                android:layout_gravity="center|bottom"
+                android:layout_gravity="center|top"
                 android:layout_weight="2"
                 android:src="@drawable/img_witch_broom" />
 
