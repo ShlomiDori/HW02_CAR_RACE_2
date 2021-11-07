@@ -5,11 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import java.util.Collections;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,11 +17,12 @@ import java.util.TimerTask;
 public class Activity_Panel extends AppCompatActivity {
 
     private ImageView[][] path;
-    private int[][] vals;
+    private int[][] vals ;
+    private int playerPos;
     private final int MAX_LIVES = 3;
-    private ImageView[] panel_IMG_hearts;
-    private ImageButton panel_BTN_right;
-    private ImageButton panel_BTN_left;
+    private ImageView[] panel_IMG_hearts ,panel_IMG_witchs;
+    private ImageView panel_IMG_witch ,panel_IMG_witch2,panel_IMG_witch3;
+    private ImageButton panel_BTN_right,panel_BTN_left;
     private Timer timer = new Timer();
     private int clock = 2 , lives=MAX_LIVES;
     @Override
@@ -43,8 +43,8 @@ public class Activity_Panel extends AppCompatActivity {
 */
 
 
- //       checkCrash();
-  //      runlogic();
+       checkCrash();
+        runlogic();
         updateUI();
     }
     @Override
@@ -62,7 +62,11 @@ public class Activity_Panel extends AppCompatActivity {
     private void findViews() {
         panel_BTN_right = findViewById(R.id.panel_BTN_right);
         panel_BTN_left = findViewById(R.id.panel_BTN_left);
-
+        panel_IMG_witchs = new ImageView[]{
+                findViewById(R.id.panel_IMG_witch),
+                findViewById(R.id.panel_IMG_witch2),
+                findViewById(R.id.panel_IMG_witch3)
+        };
         panel_IMG_hearts = new ImageView[]{
                 findViewById(R.id.panel_IMG_heart),
                 findViewById(R.id.panel_IMG_heart2),
@@ -82,20 +86,51 @@ public class Activity_Panel extends AppCompatActivity {
                 vals[i][j] = 0;
             }
         }
-        panel_BTN_left.setOnClickListener(new View.OnClickListener() {
+        initViews();
+//        panel_IMG_witch.setVisibility(View.VISIBLE);
+//        panel_IMG_witch2.setVisibility(View.INVISIBLE);
+//        panel_IMG_witch3.setVisibility(View.INVISIBLE);
+//        playerPos =0;
+
+    }
+
+
+    private void initViews() {
+        panel_BTN_right.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                next("left");
+            public void onClick(View view) {
+                if (playerPos == 0) {//player on the left move to mid
+                    panel_IMG_witchs[0].setVisibility(View.INVISIBLE);
+                    panel_IMG_witchs[1].setVisibility(View.VISIBLE);
+                    playerPos = 1;
+                } else if (playerPos == 1) {//player on the mid move to right
+                    panel_IMG_witchs[1].setVisibility(View.INVISIBLE);
+                    panel_IMG_witchs[2].setVisibility(View.VISIBLE);
+                    playerPos = 2;
+                } else if (playerPos == 2) { //player on the right cant move
+                    playerPos = 2;
+                }
             }
         });
 
-        panel_BTN_right.setOnClickListener(new View.OnClickListener() {
+        panel_BTN_left.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                next("right");
+            public void onClick(View view) {
+                if (playerPos == 2) {//player on the right move to mid
+                    panel_IMG_witchs[2].setVisibility(View.INVISIBLE);
+                    panel_IMG_witchs[1].setVisibility(View.VISIBLE);
+                    playerPos = 1;
+                } else if (playerPos == 1) {//player on the mid move to left
+                    panel_IMG_witchs[1].setVisibility(View.INVISIBLE);
+                    panel_IMG_witchs[0].setVisibility(View.VISIBLE);
+                    playerPos = 0;
+                } else if (playerPos == 0) { //player on the right cant move
+                    playerPos = 0;
+                }
             }
         });
     }
+
 
     private void startTicker() {
         timer = new Timer();
@@ -111,36 +146,39 @@ public class Activity_Panel extends AppCompatActivity {
                     }
                 });
             }
-        }, 0, 1000);
+        }, 0, 2000);
     }
 
     private void stopTicker() {
         timer.cancel();
     }
 
-    private void updateClockView() {
-        clock--;
-
-        if (clock == 0) {
-           // answered(-1);
+//    private void updateClockView() {
+//        //update every 2 sec the matrix.
+//        for (int i = vals.length - 1; i >= 0; i--) {
+//            for (int j = 0; j < vals[i].length; j++){
+//                if(i > 0){
+//                    vals[i][j] = vals[i-1][j];
+//                }
+//            }
+//        }
+//    }
+    private void updateClock() {
+        clock—-;
+       // moveEnemy();
+        if(clock==0){
+            vals[0][(int) (Math.random() * (3) + 0)] = 1;
+            clock=5;
         }
-
-
-    }
-    private void next(String ans) {
-        if(ans.equals("left"))
-        {
-            
-        }
-
     }
 
     private void checkCrash() {
 
-    }
-
-    private void runlogic() {
-
+        for (int i = 0; i < vals[vals.length - 1].length; i++) {
+            if(vals[vals.length- 1][i] == 1 && playerPos == i){
+                updateLivesViews();
+            }
+        }
     }
     private void updateLivesViews() {
         for (int i = panel_IMG_hearts.length-1; i >= 0; i--) {
@@ -151,19 +189,38 @@ public class Activity_Panel extends AppCompatActivity {
             }
         }
     }
-    private void initVals()
-    {
-        Random r = new Random();
-        int min =0 ,max=3;
-        for (int i = 0; i < path.length; i++) {
-            for (int j = 0; j < path[i].length; j++) {
-                vals[i][j] = r.nextInt((max-min)+1);
-
+    private void runlogic() {
+        for (int j = 0; j < vals[0].length; j++) {
+            if(j == 0) {
+                vals[0][j] = 1;
+            } else {
+                vals[0][j] = 0;
             }
         }
+    //    shuffleArray(vals);
     }
+
+    private void shuffleArray(int[][] vals) {
+        for (int i = 0; i < path.length; i++) {
+         //   Collections.shuffle(vals[i]);
+
+        }
+    }
+
+
+//    private void shuffleVals()
+//    {
+//        Random r = new Random();
+//        int min =0 ,max=3;
+//        for (int i = 0; i < path.length; i++) {
+//            for (int j = 0; j < path[i].length; j++) {
+//                vals[i][j] = r.nextInt((max-min)+1);
+//
+//            }
+//        }
+//    }
     private void updateUI() {
-        initVals();
+       // shuffleVals();
         for (int i = 0; i < path.length; i++) {
             for (int j = 0; j < path[i].length; j++) {
                 ImageView im = path[i][j];
