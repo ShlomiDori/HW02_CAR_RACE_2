@@ -1,3 +1,4 @@
+
 package com.example.hw01_car_race;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +33,7 @@ public class Activity_Panel extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findViews();
         initViews();
-        startTicker();
+        runGame();
 
     }
     @Override
@@ -82,7 +83,7 @@ public class Activity_Panel extends AppCompatActivity {
         panel_BTN_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                vibrate(20);
+
                 if (playerPos == 0) {//player on the left move to mid
                     panel_IMG_witchs[0].setVisibility(View.INVISIBLE);
                     panel_IMG_witchs[1].setImageResource(R.drawable.img_white_witch);
@@ -104,7 +105,7 @@ public class Activity_Panel extends AppCompatActivity {
         panel_BTN_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                vibrate(20);
+
                 if (playerPos == 2) {//player on the right move to mid
                     panel_IMG_witchs[2].setVisibility(View.INVISIBLE);
                     panel_IMG_witchs[1].setImageResource(R.drawable.img_white_witch);
@@ -124,13 +125,7 @@ public class Activity_Panel extends AppCompatActivity {
         });
     }
 
-    private void runGame()
-    {
-        checkCrash();
-        runlogic();
-        updateUI();
-        moveRock();
-    }
+
     private void startTicker() {
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -145,11 +140,70 @@ public class Activity_Panel extends AppCompatActivity {
             }
         }, 0, 1000);
     }
+    private void runGame()
+    {
+        checkCrash();
+        runLogic();
+        updateView();
+        moveRock();
 
+    }
     private void stopTicker() {
         timer.cancel();
     }
 
+    private void checkCrash() {
+        for (int i = 0; i < vals[vals.length - 1].length; i++) {
+            if(vals[vals.length- 1][i] == 1 && playerPos == i){
+                for (int j = panel_IMG_hearts.length - 1; j >= 0; j--) {
+                    if(panel_IMG_hearts[j].getVisibility() == View.VISIBLE){
+                        panel_IMG_hearts[j].setVisibility(View.INVISIBLE);
+                        Toast.makeText(Activity_Panel.this, "HIT!", Toast.LENGTH_SHORT).show();
+                        vibrate(VIBRATE_TIME);
+                        return;
+                    }if (panel_IMG_hearts[0].getVisibility() == View.INVISIBLE){
+                        Toast.makeText(Activity_Panel.this, "Game Over!", Toast.LENGTH_LONG).show();
+                        vibrate(VIBRATE_TIME);
+                        stopTicker();
+                        return;
+
+                    }
+                }
+            }
+        }
+    }
+
+    private void runLogic() {
+
+        if(clock++ % 2 == 0)
+        {
+            Random r = new Random();
+            vals[0][r.nextInt(vals[0].length)] =1 ;
+
+        }else{
+            for (int j = 0; j < COLS; j++) {
+                vals[0][j] = 0 ;
+            }
+        }
+    }
+    private void updateView()
+    {
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                ImageView im = path[i][j];
+                if (vals[i][j] == 1) {
+                    im.setVisibility(View.VISIBLE);
+                    im.setImageResource(R.drawable.img_rock);
+                    panel_IMG_witchs[playerPos].setImageResource(R.drawable.img_white_witch);
+                    panel_IMG_witchs[playerPos].setVisibility(View.VISIBLE);
+                } else if (vals[i][j] == 0) {
+                    im.setVisibility(View.INVISIBLE);
+                    panel_IMG_witchs[playerPos].setImageResource(R.drawable.img_white_witch);
+                    panel_IMG_witchs[playerPos].setVisibility(View.VISIBLE);
+                }
+            }
+        }
+    }
     private void moveRock() {
 
         for (int i = ROWS - 1; i >= 0; i--) {
@@ -163,66 +217,6 @@ public class Activity_Panel extends AppCompatActivity {
         }
 
     }
-    private void updateUI()
-    {
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLS; j++) {
-
-                if (vals[i][j] == 1) {
-                    path[i][j].setVisibility(View.VISIBLE);
-                    path[i][j].setImageResource(R.drawable.img_rock);
-                    panel_IMG_witchs[playerPos].setImageResource(R.drawable.img_white_witch);
-                    panel_IMG_witchs[playerPos].setVisibility(View.VISIBLE);
-                } else if (vals[i][j] == 0) {
-                    path[i][j].setVisibility(View.INVISIBLE);
-                    panel_IMG_witchs[playerPos].setImageResource(R.drawable.img_white_witch);
-                    panel_IMG_witchs[playerPos].setVisibility(View.VISIBLE);
-                }
-            }
-        }
-    }
-
-    private void checkCrash() {
-        for (int i = 0; i < vals[vals.length - 1].length; i++) {
-            if(vals[vals.length- 1][i] == 1 && playerPos == i){
-                for (int j = panel_IMG_hearts.length - 1; j >= 0; j--) {
-                    if(panel_IMG_hearts[j].getVisibility() == View.VISIBLE){
-                        panel_IMG_hearts[j].setVisibility(View.INVISIBLE);
-                        Toast.makeText(Activity_Panel.this, "Hit!", Toast.LENGTH_SHORT).show();
-                        vibrate(VIBRATE_TIME);
-                        return;
-                    }else if (panel_IMG_hearts[0].getVisibility() == View.INVISIBLE){
-                        Toast.makeText(Activity_Panel.this, "Game Over!", Toast.LENGTH_SHORT).show();
-                        vibrate(VIBRATE_TIME);
-                        onStop();
-                        return;
-                    }
-                }
-            }
-        }
-    }
-//
-//    private void updateLivesViews() {
-//        for (int i = panel_IMG_hearts.length-1; i >= 0; i--) {
-//            if ((i+1) >= lives) {
-//                panel_IMG_hearts[i].setVisibility(View.VISIBLE);
-//            }
-//           else {
-//                Toast.makeText(Activity_Panel.this,"Hit" ,Toast.LENGTH_SHORT ).show();
-//                vibrate(VIBRATE_TIME);
-//                panel_IMG_hearts[i].setVisibility(View.INVISIBLE);
-//            }
-//            if(lives == 0)
-//            {
-//                panel_IMG_hearts[i].setVisibility(View.INVISIBLE);
-//                Toast.makeText(Activity_Panel.this,"Game Over!" ,Toast.LENGTH_LONG ).show();
-//                vibrate(VIBRATE_TIME);
-//                onStop();
-//                return ;
-//            }
-//        }
-//
-//    }
 
     private void vibrate(int timer) {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -231,22 +225,6 @@ public class Activity_Panel extends AppCompatActivity {
         } else {
             v.vibrate(timer);
         }
-    }
-    private void runlogic() {
-
-        if(clock++ % 2 == 0)
-        {
-            Random r = new Random();
-            vals[0][r.nextInt(vals[0].length)] =1 ;
-
-        }else{
-            for (int j = 0; j < COLS; j++) {
-                vals[0][j] = 0 ;
-            }
-        }
-
- //       vals[ROWS -1][playerPos] = PLAYER ;
-
     }
 }
 
