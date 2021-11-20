@@ -1,4 +1,4 @@
-package com.example.hw01_car_race;
+package com.example.hw02_car_race_2;
 
 import org.junit.Test;
 

@@ -1,5 +1,5 @@
 
-package com.example.hw01_car_race;
+package com.example.hw02_car_race_2;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;

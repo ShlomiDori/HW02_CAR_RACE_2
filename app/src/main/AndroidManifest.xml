@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hw01_car_race">
+    package="com.example.hw02_car_race_2">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="HW02_CARE_RACE_2"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.HW01_CAR_RACE">
+        android:supportsRtl="true">
         <activity
-            android:name=".Activity_Panel"
+            android:name="com.example.hw02_car_race_2.Activity_Panel"
             android:exported="true"
             android:screenOrientation="portrait">\
             <intent-filter>
