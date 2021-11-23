@@ -87,6 +87,20 @@
                 android:layout_weight="1"
                 android:src="@drawable/img_rock"
                 android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/demo_IMG_03"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/img_rock"
+                android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/demo_IMG_04"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/img_rock"
+                android:visibility="invisible" />
 
         </LinearLayout>
 
@@ -114,6 +128,20 @@
 
             <ImageView
                 android:id="@+id/demo_IMG_12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/img_rock"
+                android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/demo_IMG_13"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/img_rock"
+                android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/demo_IMG_14"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -151,7 +179,20 @@
                 android:layout_weight="1"
                 android:src="@drawable/img_rock"
                 android:visibility="invisible" />
-
+            <ImageView
+                android:id="@+id/demo_IMG_23"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/img_rock"
+                android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/demo_IMG_24"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/img_rock"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <LinearLayout
@@ -185,6 +226,20 @@
                 android:layout_weight="1"
                 android:src="@drawable/img_rock"
                 android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/demo_IMG_33"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/img_rock"
+                android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/demo_IMG_34"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/img_rock"
+                android:visibility="invisible" />
 
         </LinearLayout>
 
@@ -207,7 +262,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/img_white_witch" />
+                android:src="@drawable/img_white_witch"
+                android:visibility="invisible"/>
 
 
             <ImageView
@@ -215,7 +271,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:src="@drawable/img_white_witch"
+                />
+            <ImageView
+                android:id="@+id/panel_IMG_witch4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/img_white_witch"
+                android:visibility="invisible"/>
 
+
+            <ImageView
+                android:id="@+id/panel_IMG_witch5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:src="@drawable/img_white_witch"
                 android:visibility="invisible" />
 

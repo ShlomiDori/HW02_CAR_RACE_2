@@ -16,13 +16,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
+
 public class Activity_Panel extends AppCompatActivity {
 
     private static final int VIBRATE_TIME = 500;
     private ImageView[][] path;
     private int[][] vals ;
     private int playerPos;
-    private final int MAX_LIVES = 3 , COLS = 3 , ROWS =5 , PLAYER = 3 ;
+    private final int MAX_LIVES = 3 , COLS = 5 , ROWS =5;
     private ImageView[] panel_IMG_hearts,panel_IMG_witchs;
     private ImageButton panel_BTN_right,panel_BTN_left;
     private Timer timer = new Timer();
@@ -30,7 +31,8 @@ public class Activity_Panel extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.game_layout);
+        MSPV3.initHelper(this);
         findViews();
         initViews();
         runGame();
@@ -54,7 +56,9 @@ public class Activity_Panel extends AppCompatActivity {
         panel_IMG_witchs = new ImageView[]{
                 findViewById(R.id.panel_IMG_witch),
                 findViewById(R.id.panel_IMG_witch2),
-                findViewById(R.id.panel_IMG_witch3)
+                findViewById(R.id.panel_IMG_witch3),
+                findViewById(R.id.panel_IMG_witch4),
+                findViewById(R.id.panel_IMG_witch5)
         };
         panel_IMG_hearts = new ImageView[]{
                 findViewById(R.id.panel_IMG_heart),
@@ -63,11 +67,11 @@ public class Activity_Panel extends AppCompatActivity {
         };
 
         path = new ImageView[][]{
-                {findViewById(R.id.demo_IMG_00), findViewById(R.id.demo_IMG_01), findViewById(R.id.demo_IMG_02)},
-                {findViewById(R.id.demo_IMG_10), findViewById(R.id.demo_IMG_11), findViewById(R.id.demo_IMG_12)},
-                {findViewById(R.id.demo_IMG_20), findViewById(R.id.demo_IMG_21), findViewById(R.id.demo_IMG_22)},
-                {findViewById(R.id.demo_IMG_30), findViewById(R.id.demo_IMG_31), findViewById(R.id.demo_IMG_32)},
-                {findViewById(R.id.panel_IMG_witch), findViewById(R.id.panel_IMG_witch2), findViewById(R.id.panel_IMG_witch3)}
+        {findViewById(R.id.demo_IMG_00), findViewById(R.id.demo_IMG_01), findViewById(R.id.demo_IMG_02),findViewById(R.id.demo_IMG_03),findViewById(R.id.demo_IMG_04)},
+        {findViewById(R.id.demo_IMG_10), findViewById(R.id.demo_IMG_11), findViewById(R.id.demo_IMG_12),findViewById(R.id.demo_IMG_13),findViewById(R.id.demo_IMG_14)},
+        {findViewById(R.id.demo_IMG_20), findViewById(R.id.demo_IMG_21), findViewById(R.id.demo_IMG_22),findViewById(R.id.demo_IMG_23),findViewById(R.id.demo_IMG_24)},
+        {findViewById(R.id.demo_IMG_30), findViewById(R.id.demo_IMG_31), findViewById(R.id.demo_IMG_32),findViewById(R.id.demo_IMG_33),findViewById(R.id.demo_IMG_34)},
+        {findViewById(R.id.panel_IMG_witch), findViewById(R.id.panel_IMG_witch2), findViewById(R.id.panel_IMG_witch3), findViewById(R.id.panel_IMG_witch4), findViewById(R.id.panel_IMG_witch5)}
         };
         vals = new int[ROWS][COLS];
         //init vals

@@ -1,4 +1,4 @@
-package hw02_car_race_2;
+package com.example.hw02_car_race_2;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

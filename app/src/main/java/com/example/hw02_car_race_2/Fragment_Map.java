@@ -1,4 +1,4 @@
-package hw02_car_race_2;
+package com.example.hw02_car_race_2;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,9 +13,7 @@ import com.google.android.material.button.MaterialButton;
 public class Fragment_Map extends Fragment {
 
     private MaterialButton frame2_BTN_map;
-
     private AppCompatActivity activity;
-
     private CallBack_Map callBack_map;
 
     public void setActivity(AppCompatActivity activity) {

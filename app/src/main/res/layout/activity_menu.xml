@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_Menu"
+    android:keepScreenOn="true">
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_BTN_sensors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Sensor Version"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_BTN_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Light Version"
+        app:layout_constraintEnd_toEndOf="@+id/menu_BTN_sensors"
+        app:layout_constraintStart_toStartOf="@+id/menu_BTN_sensors"
+        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_sensors" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_BTN_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text=" Top 10 "
+        app:layout_constraintEnd_toEndOf="@+id/menu_BTN_light"
+        app:layout_constraintStart_toStartOf="@+id/menu_BTN_light"
+        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_light" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_BTN_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Exit"
+        app:layout_constraintEnd_toEndOf="@+id/menu_BTN_top"
+        app:layout_constraintStart_toStartOf="@+id/menu_BTN_top"
+        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_top" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
