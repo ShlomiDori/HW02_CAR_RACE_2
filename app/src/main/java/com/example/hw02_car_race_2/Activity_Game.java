@@ -17,7 +17,7 @@ import java.util.TimerTask;
 
 
 
-public class Activity_Panel extends AppCompatActivity {
+public class Activity_Game extends AppCompatActivity {
 
     private static final int VIBRATE_TIME = 500;
     private ImageView[][] path;
@@ -32,7 +32,6 @@ public class Activity_Panel extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_layout);
-        MSPV3.initHelper(this);
         findViews();
         initViews();
         runGame();
@@ -71,6 +70,7 @@ public class Activity_Panel extends AppCompatActivity {
         {findViewById(R.id.demo_IMG_10), findViewById(R.id.demo_IMG_11), findViewById(R.id.demo_IMG_12),findViewById(R.id.demo_IMG_13),findViewById(R.id.demo_IMG_14)},
         {findViewById(R.id.demo_IMG_20), findViewById(R.id.demo_IMG_21), findViewById(R.id.demo_IMG_22),findViewById(R.id.demo_IMG_23),findViewById(R.id.demo_IMG_24)},
         {findViewById(R.id.demo_IMG_30), findViewById(R.id.demo_IMG_31), findViewById(R.id.demo_IMG_32),findViewById(R.id.demo_IMG_33),findViewById(R.id.demo_IMG_34)},
+        {findViewById(R.id.demo_IMG_40), findViewById(R.id.demo_IMG_41), findViewById(R.id.demo_IMG_42),findViewById(R.id.demo_IMG_43),findViewById(R.id.demo_IMG_44)},
         {findViewById(R.id.panel_IMG_witch), findViewById(R.id.panel_IMG_witch2), findViewById(R.id.panel_IMG_witch3), findViewById(R.id.panel_IMG_witch4), findViewById(R.id.panel_IMG_witch5)}
         };
         vals = new int[ROWS][COLS];
@@ -162,11 +162,11 @@ public class Activity_Panel extends AppCompatActivity {
                 for (int j = panel_IMG_hearts.length - 1; j >= 0; j--) {
                     if(panel_IMG_hearts[j].getVisibility() == View.VISIBLE){
                         panel_IMG_hearts[j].setVisibility(View.INVISIBLE);
-                        Toast.makeText(Activity_Panel.this, "HIT!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Activity_Game.this, "HIT!", Toast.LENGTH_SHORT).show();
                         vibrate(VIBRATE_TIME);
                         return;
                     }if (panel_IMG_hearts[0].getVisibility() == View.INVISIBLE){
-                        Toast.makeText(Activity_Panel.this, "Game Over!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Activity_Game.this, "Game Over!", Toast.LENGTH_LONG).show();
                         vibrate(VIBRATE_TIME);
                         stopTicker();
                         return;

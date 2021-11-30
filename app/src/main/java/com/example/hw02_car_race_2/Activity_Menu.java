@@ -20,10 +20,10 @@ public class Activity_Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        menu_BTN_sensors = findViewById(R.id.menu_BTN_sensors);
+        menu_BTN_sensors = findViewById(R.id.menu_BTN_acc);
         menu_BTN_light = findViewById(R.id.menu_BTN_light);
-        menu_BTN_top = findViewById(R.id.menu_BTN_top);
-        menu_BTN_exit = findViewById(R.id.menu_BTN_exit);
+     //   menu_BTN_top = findViewById(R.id.menu_BTN_top);
+     //   menu_BTN_exit = findViewById(R.id.menu_BTN_exit);
 
         menu_BTN_sensors.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +53,7 @@ public class Activity_Menu extends AppCompatActivity {
     }
 
     private void startGame(String sns) {
-        Intent myIntent = new Intent(this, Activity_Panel.class);
+        Intent myIntent = new Intent(this, Activity_Game.class);
 
         Bundle bundle = new Bundle();
       //  bundle.putString(Activity_Panel.SENSOR_TYPE,sns);
