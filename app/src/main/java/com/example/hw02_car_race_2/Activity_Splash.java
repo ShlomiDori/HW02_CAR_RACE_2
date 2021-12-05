@@ -72,7 +72,7 @@ public class Activity_Splash extends AppCompatActivity {
     }
 
     private void openHomeActivity() {
-        Intent intent = new Intent(this, Activity_Menu.class);
+        Intent intent = new Intent(this, Activity_Game.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         //finish();

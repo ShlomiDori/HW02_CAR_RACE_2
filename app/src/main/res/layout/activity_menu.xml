@@ -13,10 +13,10 @@
         android:id="@+id/menu_BTN_acc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="216dp"
         android:text="Sensor Version"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:textColor="@color/white"
         android:text="Light Version"
         app:layout_constraintEnd_toEndOf="@+id/menu_BTN_acc"
         app:layout_constraintStart_toStartOf="@+id/menu_BTN_acc"

@@ -3,6 +3,7 @@ package com.example.hw02_car_race_2;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -10,6 +11,7 @@ import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Random;
 import java.util.Timer;
@@ -28,6 +30,10 @@ public class Activity_Game extends AppCompatActivity {
     private ImageButton panel_BTN_right,panel_BTN_left;
     private Timer timer = new Timer();
     private int clock = 0 , lives=MAX_LIVES;
+    private TextView score;
+    private int scoreCount = 0;
+    private MediaPlayer crashSound , coinSound;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,28 +86,31 @@ public class Activity_Game extends AppCompatActivity {
                 vals[i][j] = 0;
             }
         }
+        score = findViewById(R.id.duaration);
+        crashSound = MediaPlayer.create(this,R.raw.crash_sound);
+        coinSound = MediaPlayer.create(this,R.raw.coins_sound);
     }
 
 
     private void initViews() {
+//        remove the player
         panel_BTN_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (playerPos == 0) {//player on the left move to left mid
+                    setVisibleFromTo(panel_IMG_witchs,0,1);
 
-                if (playerPos == 0) {//player on the left move to mid
-                    panel_IMG_witchs[0].setVisibility(View.INVISIBLE);
-                    panel_IMG_witchs[1].setImageResource(R.drawable.img_white_witch);
-                    panel_IMG_witchs[1].setVisibility(View.VISIBLE);
-                    playerPos = 1;
-                } else if (playerPos == 1) {//player on the mid move to right
-                    panel_IMG_witchs[1].setVisibility(View.INVISIBLE);
-                    panel_IMG_witchs[2].setImageResource(R.drawable.img_white_witch);
-                    panel_IMG_witchs[2].setVisibility(View.VISIBLE);
-                    playerPos = 2;
-                } else if (playerPos == 2) { //player on the right cant move
-                    panel_IMG_witchs[2].setImageResource(R.drawable.img_white_witch);
-                    panel_IMG_witchs[2].setVisibility(View.VISIBLE);
-                    playerPos = 2;
+                } else if (playerPos == 1) {//player on the left mid move to mid
+                    setVisibleFromTo(panel_IMG_witchs,1,2);
+
+                } else if (playerPos == 2) { //player on the mid move to right mid
+                    setVisibleFromTo(panel_IMG_witchs,2,3);
+
+                } else if (playerPos == 3) { //player on the right mid move to right
+                    setVisibleFromTo(panel_IMG_witchs,3,4);
+
+                }else if (playerPos == 4) { //player on the right move cant move
+                    setVisibleFromTo(panel_IMG_witchs,4,4);
                 }
             }
         });
@@ -109,24 +118,35 @@ public class Activity_Game extends AppCompatActivity {
         panel_BTN_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (playerPos == 4) {//player on the right move to right mid
+                    setVisibleFromTo(panel_IMG_witchs,4,3);
 
-                if (playerPos == 2) {//player on the right move to mid
-                    panel_IMG_witchs[2].setVisibility(View.INVISIBLE);
-                    panel_IMG_witchs[1].setImageResource(R.drawable.img_white_witch);
-                    panel_IMG_witchs[1].setVisibility(View.VISIBLE);
-                    playerPos = 1;
-                } else if (playerPos == 1) {//player on the mid move to left
-                    panel_IMG_witchs[1].setVisibility(View.INVISIBLE);
-                    panel_IMG_witchs[0].setImageResource(R.drawable.img_white_witch);
-                    panel_IMG_witchs[0].setVisibility(View.VISIBLE);
-                    playerPos= 0;
-                } else if (playerPos== 0) { //player on the right cant move
-                    panel_IMG_witchs[0].setImageResource(R.drawable.img_white_witch);
-                    panel_IMG_witchs[0].setVisibility(View.VISIBLE);
-                    playerPos = 0;
+                } else if (playerPos == 3) {//player on the right mid move to mid
+                    setVisibleFromTo(panel_IMG_witchs,3,2);
+
+                } else if (playerPos == 2) { //player on the mid move to left mid
+                    setVisibleFromTo(panel_IMG_witchs,2,1);
+                }
+
+                else if (playerPos == 1) { //player on the  lrft mid move to left
+                    setVisibleFromTo(panel_IMG_witchs,1,0);
+                }
+
+                else if (playerPos == 0) { //player on the left cant move
+                    setVisibleFromTo(panel_IMG_witchs,0,0);
                 }
             }
         });
+    }
+
+    private void setVisibleFromTo(ImageView[] witchs, int from, int to) {
+        //        move the player from current location to new location
+        if(to != from){
+            witchs[from].setVisibility(View.INVISIBLE);
+        }
+        witchs[to].setImageResource(R.drawable.img_white_witch);
+        witchs[to].setVisibility(View.VISIBLE);
+        playerPos = to;
     }
 
 
@@ -159,22 +179,33 @@ public class Activity_Game extends AppCompatActivity {
     private void checkCrash() {
         for (int i = 0; i < vals[vals.length - 1].length; i++) {
             if(vals[vals.length- 1][i] == 1 && playerPos == i){
+                scoreCount -=500;
                 for (int j = panel_IMG_hearts.length - 1; j >= 0; j--) {
                     if(panel_IMG_hearts[j].getVisibility() == View.VISIBLE){
                         panel_IMG_hearts[j].setVisibility(View.INVISIBLE);
                         Toast.makeText(Activity_Game.this, "HIT!", Toast.LENGTH_SHORT).show();
                         vibrate(VIBRATE_TIME);
+                        crashSound.start();
                         return;
                     }if (panel_IMG_hearts[0].getVisibility() == View.INVISIBLE){
+                        crashSound.start();
                         Toast.makeText(Activity_Game.this, "Game Over!", Toast.LENGTH_LONG).show();
                         vibrate(VIBRATE_TIME);
                         stopTicker();
                         return;
 
                     }
+
                 }
+            }else if (vals[vals.length- 1][playerPos] == 2 ){
+                coinSound.start();
+                scoreCount +=1000;
+                Toast.makeText(Activity_Game.this, "WOW!", Toast.LENGTH_SHORT).show();
+                vibrate(VIBRATE_TIME);
+                return;
             }
         }
+
     }
 
     private void runLogic() {
@@ -183,7 +214,12 @@ public class Activity_Game extends AppCompatActivity {
         {
             Random r = new Random();
             vals[0][r.nextInt(vals[0].length)] =1 ;
-
+            int randomCoin = r.nextInt(vals[0].length-1);
+            if(randomCoin >=  vals[0][r.nextInt(vals[0].length)])
+            {
+                randomCoin+=1;
+            }
+            vals[0][randomCoin] =2;
         }else{
             for (int j = 0; j < COLS; j++) {
                 vals[0][j] = 0 ;
@@ -198,25 +234,30 @@ public class Activity_Game extends AppCompatActivity {
                 if (vals[i][j] == 1) {
                     im.setVisibility(View.VISIBLE);
                     im.setImageResource(R.drawable.img_rock);
-                    panel_IMG_witchs[playerPos].setImageResource(R.drawable.img_white_witch);
-                    panel_IMG_witchs[playerPos].setVisibility(View.VISIBLE);
+                    setVisibleFromTo(panel_IMG_witchs,playerPos,playerPos);
+
                 } else if (vals[i][j] == 0) {
                     im.setVisibility(View.INVISIBLE);
-                    panel_IMG_witchs[playerPos].setImageResource(R.drawable.img_white_witch);
-                    panel_IMG_witchs[playerPos].setVisibility(View.VISIBLE);
+                    setVisibleFromTo(panel_IMG_witchs,playerPos,playerPos);
+
+                }
+                else if (vals[i][j] == 2) {
+                    im.setVisibility(View.VISIBLE);
+                    im.setImageResource(R.drawable.img_coin_bitcoin);
+                    setVisibleFromTo(panel_IMG_witchs,playerPos,playerPos);
                 }
             }
         }
     }
     private void moveRock() {
-
+        scoreCount +=100;
+        score.setText(""+ scoreCount);
         for (int i = ROWS - 1; i >= 0; i--) {
             for (int j = 0; j <COLS; j++){
                 if(i>0)
                 {
                     vals[i][j] = vals[i-1][j];
                 }
-
             }
         }
 
