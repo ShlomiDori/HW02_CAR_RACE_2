@@ -20,7 +20,10 @@ import java.util.TimerTask;
 
 
 public class Activity_Game extends AppCompatActivity {
-
+    public static final String SENSOR_TYPE = "sensor_type";
+    public static final String LAT = "LAT";
+    public static final String LNG = "LNG";
+    public static final String NAME = "name";
     private static final int VIBRATE_TIME = 500;
     private ImageView[][] path;
     private int[][] vals ;

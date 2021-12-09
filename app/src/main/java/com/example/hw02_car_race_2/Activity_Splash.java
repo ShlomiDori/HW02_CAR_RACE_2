@@ -16,7 +16,6 @@ public class Activity_Splash extends AppCompatActivity {
     private static final String TAG = Activity_Splash.class.getSimpleName();
 
     final int ANIM_DURATION = 4400;
-
     private ImageView splash_IMG_logo;
 
     @Override
@@ -25,9 +24,7 @@ public class Activity_Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         findViews();
-
         splash_IMG_logo.setVisibility(View.INVISIBLE);
-
         showViewSlideDown(splash_IMG_logo);
     }
 
@@ -72,10 +69,10 @@ public class Activity_Splash extends AppCompatActivity {
     }
 
     private void openHomeActivity() {
-        Intent intent = new Intent(this, Activity_Game.class);
+        Intent intent = new Intent(this, Activity_Menu.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
-        //finish();
+        finish();
     }
 
     private void findViews() {
