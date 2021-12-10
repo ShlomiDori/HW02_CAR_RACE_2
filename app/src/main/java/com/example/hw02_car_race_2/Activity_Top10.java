@@ -14,7 +14,6 @@ public class Activity_Top10 extends AppCompatActivity {
 
     private Fragment_List fragmentList;
     private Fragment_Map fragmentMap;
-//    private TextView info;
     private Button list_BTN_main;
 
     @Override
@@ -34,8 +33,8 @@ public class Activity_Top10 extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.frame2,fragmentMap).commit();
 
         Bundle bundle = getIntent().getBundleExtra(Activity_Menu.BUNDLE);
-    //    double lat = bundle.getDouble(Activity_Game.LAT);
-     //   double lng = bundle.getDouble(Activity_Game.LNG);
+        double lat = bundle.getDouble(Activity_Game.LAT);
+        double lng = bundle.getDouble(Activity_Game.LNG);
     }
 
     @Override

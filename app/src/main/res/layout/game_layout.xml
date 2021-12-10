@@ -317,7 +317,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/img_white_witch"
-                />
+                android:visibility="visible" />
             <ImageView
                 android:id="@+id/panel_IMG_witch4"
                 android:layout_width="0dp"

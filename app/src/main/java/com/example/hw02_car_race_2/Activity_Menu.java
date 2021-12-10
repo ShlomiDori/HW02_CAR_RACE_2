@@ -1,20 +1,24 @@
 package com.example.hw02_car_race_2;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationRequest;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -25,10 +29,9 @@ import java.util.Locale;
 
 public class Activity_Menu extends AppCompatActivity {
 
-    private MaterialButton menu_BTN_sensors;
-    private MaterialButton menu_BTN_light;
-    private MaterialButton menu_BTN_top;
-    //private FusedLocationProviderClient fusedLocationProviderClient;
+    private Button menu_BTN_sensors;
+    private Button menu_BTN_light;
+    private Button menu_BTN_top;
     //private MediaPlayer mediaPlayer;
     private boolean sensorsFlag = false;
     private double lat, lng;
@@ -44,14 +47,14 @@ public class Activity_Menu extends AppCompatActivity {
         findView();
         setOnClick();
         // Check location permission
-//        if (ActivityCompat.checkSelfPermission(Activity_Menu.this,
-//                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-//            getCurrentLocation();
-//        } else {
-//            ActivityCompat.requestPermissions(Activity_Menu.this,
-//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-//        }
-
+        if (ActivityCompat.checkSelfPermission(Activity_Menu.this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            getCurrentLocation();
+        } else {
+            ActivityCompat.requestPermissions(Activity_Menu.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+        }
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
     private void setOnClick() {
@@ -87,30 +90,24 @@ public class Activity_Menu extends AppCompatActivity {
         packgeOfBundle();
         if (sns.equals("Top 10")) {
             myIntent = new Intent(this, Activity_Top10.class);
+
         } else {
             myIntent = new Intent(this, Activity_Game.class);
             bundle.putString(Activity_Game.SENSOR_TYPE, sns);
         }
 
-        myIntent.putExtra("Bundle", bundle);
+        myIntent.putExtra(BUNDLE, bundle);
         startActivity(myIntent);
     }
 
+
+    @SuppressLint("MissingPermission")
     private void getCurrentLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
                 Location location = task.getResult();
+
                 if (location != null) {
                     try {
                         Geocoder geocoder = new Geocoder(Activity_Menu.this,
@@ -126,7 +123,6 @@ public class Activity_Menu extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void packgeOfBundle() {

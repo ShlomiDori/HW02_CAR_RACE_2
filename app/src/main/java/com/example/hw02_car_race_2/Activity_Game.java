@@ -3,6 +3,8 @@ package com.example.hw02_car_race_2;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,24 +26,36 @@ public class Activity_Game extends AppCompatActivity {
     public static final String LAT = "LAT";
     public static final String LNG = "LNG";
     public static final String NAME = "name";
+    public static final String SENSORS_FLAG = "SENSORS_FLAG";
+
+    private static Sensor accSensor;
+    private static SensorManager sensorManager;
+
     private static final int VIBRATE_TIME = 500;
+    private final int MAX_LIVES = 3 , COLS = 5 , ROWS =5;
+    private int clock = 0 , lives=MAX_LIVES;
+    private int scoreCount = 0,playerPos;
+    private double lat = 0, lng = 0;
+
     private ImageView[][] path;
     private int[][] vals ;
-    private int playerPos;
-    private final int MAX_LIVES = 3 , COLS = 5 , ROWS =5;
     private ImageView[] panel_IMG_hearts,panel_IMG_witchs;
+
     private ImageButton panel_BTN_right,panel_BTN_left;
     private Timer timer = new Timer();
-    private int clock = 0 , lives=MAX_LIVES;
-    private TextView score;
-    private int scoreCount = 0;
-    private MediaPlayer crashSound , coinSound;
 
+    private TextView score;
+    private static Bundle bundle;
+    private String name = "";
+    private MediaPlayer crashSound , coinSound;
+    private boolean sensorsFlag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_layout);
         findViews();
+        initSensor();
+    //    unpackBundle();
         initViews();
         runGame();
 
@@ -56,6 +70,22 @@ public class Activity_Game extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         stopTicker();
+    }
+    private void initSensor() {
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+    }
+
+    public static Bundle getBundle() {
+        return bundle;
+    }
+
+    private void unpackBundle() {
+        bundle = getIntent().getBundleExtra(Activity_Menu.BUNDLE);
+        name = bundle.getString(NAME);
+        sensorsFlag = bundle.getBoolean(SENSORS_FLAG);
+        lat = bundle.getDouble(LAT);
+        lng = bundle.getDouble(LNG);
     }
 
     private void findViews() {

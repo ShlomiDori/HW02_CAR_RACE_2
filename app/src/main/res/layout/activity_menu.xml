@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,46 +9,44 @@
     android:background="@drawable/menu_background"
     android:keepScreenOn="true">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/menu_BTN_top"
-        android:layout_width="146dp"
-        android:layout_height="51dp"
-        android:text="Top 10"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/menu_BTN_sensors"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="@+id/menu_BTN_sensors"
-        app:strokeColor="#EDB714"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="500dp" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/menu_BTN_light"
-        android:layout_width="150dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="28dp"
-        android:text="Light"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/menu_BTN_sensors"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/menu_BTN_sensors"
-        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_sensors"
-        app:strokeColor="#EDB714" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/menu_BTN_sensors"
-        android:layout_width="151dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="560dp"
-        android:text="Sensor"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="#EDB714" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_menu"
+        android:background="@drawable/menu_background" />
+
+    <LinearLayout
+        android:id="@+id/bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="#090603"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/menu_BTN_top"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Top 10" />
+
+        <Button
+            android:id="@+id/menu_BTN_sensors"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Sensors" />
+
+        <Button
+            android:id="@+id/menu_BTN_light"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Light" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

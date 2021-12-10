@@ -22,7 +22,7 @@ public class Fragment_Map extends Fragment {
 
     private MaterialButton frame2_BTN_map;
     private AppCompatActivity activity;
-    private CallBack_Map callBack_map;
+    //private CallBack_Map callBack_map;
 
 
     private boolean isMapReady = false;
