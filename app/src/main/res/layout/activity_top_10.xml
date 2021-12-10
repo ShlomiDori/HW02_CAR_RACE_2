@@ -15,19 +15,24 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <TextView
-            android:id="@+id/info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Top 10"
-            android:textColor="@color/black"
-            android:textSize="30sp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/top_10_img" />
+        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/frame1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
             android:layout_weight="1"
             android:background="#FFFF00" />
 
@@ -37,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+
             android:background="#FF9800" />
 
         <Button
@@ -44,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Main Menu" />
+            android:text="Menu" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

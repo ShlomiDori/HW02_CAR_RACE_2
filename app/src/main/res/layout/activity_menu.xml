@@ -10,12 +10,22 @@
     android:keepScreenOn="true">
 
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_menu"
-        android:background="@drawable/menu_background" />
+        android:background="@drawable/menu_background">
+
+        <EditText
+            android:id="@+id/edit_TEXT_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:backgroundTint="@color/orenge"
+            android:ems="10"
+            android:hint="NAME" />
+    </FrameLayout>
+
 
     <LinearLayout
         android:id="@+id/bottom_menu"
@@ -32,18 +42,21 @@
             android:id="@+id/menu_BTN_top"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/orenge"
             android:text="Top 10" />
 
         <Button
             android:id="@+id/menu_BTN_sensors"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/orenge"
             android:text="Sensors" />
 
         <Button
             android:id="@+id/menu_BTN_light"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/orenge"
             android:text="Light" />
 
     </LinearLayout>

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity_Top10"
     android:id="@+id/frame_List"
     android:keepScreenOn="true"
-    android:background="#FF9800"
+    android:background="#10100F"
     >
 
     <LinearLayout
@@ -38,8 +37,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:text="1"
+                    android:backgroundTint="#FF9800"
                     android:textColor="@color/black"
-                    android:textSize="10sp">
+                    android:textSize="11sp">
 
                 </Button>
 
@@ -50,8 +50,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:text="2"
+                    android:backgroundTint="#FF9800"
                     android:textColor="@color/black"
-                    android:textSize="10sp"></Button>
+                    android:textSize="11sp"></Button>
 
                 <Button
                     android:id="@+id/list_TXT_3"
@@ -60,8 +61,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:text="3"
+                    android:backgroundTint="#FF9800"
                     android:textColor="@color/black"
-                    android:textSize="10sp"></Button>
+                    android:textSize="11sp"></Button>
 
                 <Button
                     android:id="@+id/list_TXT_4"
@@ -70,8 +72,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:text="4"
+                    android:backgroundTint="#FF9800"
                     android:textColor="@color/black"
-                    android:textSize="10sp"></Button>
+                    android:textSize="11sp"></Button>
 
                 <Button
                     android:id="@+id/list_TXT_5"
@@ -80,8 +83,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:text="5"
+                    android:backgroundTint="#FF9800"
                     android:textColor="@color/black"
-                    android:textSize="10sp"></Button>
+                    android:textSize="11sp"></Button>
 
             </LinearLayout>
 
@@ -101,8 +105,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:text="6"
+                    android:backgroundTint="#FF9800"
                     android:textColor="@color/black"
-                    android:textSize="10sp"></Button>
+                    android:textSize="11sp"></Button>
 
                 <Button
                     android:id="@+id/list_TXT_7"
@@ -111,8 +116,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:text="7"
+                    android:backgroundTint="#FF9800"
                     android:textColor="@color/black"
-                    android:textSize="10sp"></Button>
+                    android:textSize="11sp"></Button>
 
                 <Button
                     android:id="@+id/list_TXT_8"
@@ -121,8 +127,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:text="8"
+                    android:backgroundTint="#FF9800"
                     android:textColor="@color/black"
-                    android:textSize="10sp"></Button>
+                    android:textSize="11sp"></Button>
 
                 <Button
                     android:id="@+id/list_TXT_9"
@@ -131,8 +138,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:text="9"
+                    android:backgroundTint="#FF9800"
                     android:textColor="@color/black"
-                    android:textSize="10sp"></Button>
+                    android:textSize="11sp"></Button>
 
                 <Button
                     android:id="@+id/list_TXT_10"
@@ -141,8 +149,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:text="10"
+                    android:backgroundTint="#FF9800"
                     android:textColor="@color/black"
-                    android:textSize="10sp"></Button>
+                    android:textSize="11sp"></Button>
 
             </LinearLayout>
 

@@ -1,6 +1,7 @@
 
 package com.example.hw02_car_race_2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -15,6 +16,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.hw02_car_race_2.objects.MSPV3;
+import com.example.hw02_car_race_2.objects.MyDatabase;
+import com.example.hw02_car_race_2.objects.Record;
+import com.google.gson.Gson;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,12 +33,14 @@ import java.util.TimerTask;
 
 
 public class Activity_Game extends AppCompatActivity {
-    public static final String SENSOR_TYPE = "sensor_type";
+
     public static final String LAT = "LAT";
     public static final String LNG = "LNG";
     public static final String NAME = "name";
-    public static final String SENSORS_FLAG = "SENSORS_FLAG";
-
+    public static final String LIGHT_FLAG = "LIGHT_FLAG";
+    private static final String DATE_PATTERN ="dd/mm/yyyy" ;
+    private final String DB_NAME = "HALLOWEEN_GAME_DB";
+    private final String DBVal = "{\"records\":[]}";
     private static Sensor accSensor;
     private static SensorManager sensorManager;
 
@@ -40,23 +53,27 @@ public class Activity_Game extends AppCompatActivity {
     private ImageView[][] path;
     private int[][] vals ;
     private ImageView[] panel_IMG_hearts,panel_IMG_witchs;
-
     private ImageButton panel_BTN_right,panel_BTN_left;
     private Timer timer = new Timer();
-
     private TextView score;
     private static Bundle bundle;
     private String name = "";
     private MediaPlayer crashSound , coinSound;
-    private boolean sensorsFlag;
+    private boolean lightFlag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_layout);
         findViews();
-        initSensor();
-    //    unpackBundle();
-        initViews();
+
+        openBundles();
+        if(lightFlag){
+            initViews();
+        }else{
+            removeButtons();
+            initSensor();
+        }
+
         runGame();
 
     }
@@ -70,20 +87,21 @@ public class Activity_Game extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         stopTicker();
+        //updateDatabase();
     }
     private void initSensor() {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
-    public static Bundle getBundle() {
+    public static Bundle getBundles() {
         return bundle;
     }
 
-    private void unpackBundle() {
+    private void openBundles() {
         bundle = getIntent().getBundleExtra(Activity_Menu.BUNDLE);
         name = bundle.getString(NAME);
-        sensorsFlag = bundle.getBoolean(SENSORS_FLAG);
+        lightFlag = bundle.getBoolean(LIGHT_FLAG);
         lat = bundle.getDouble(LAT);
         lng = bundle.getDouble(LNG);
     }
@@ -303,6 +321,60 @@ public class Activity_Game extends AppCompatActivity {
         } else {
             v.vibrate(timer);
         }
+    }
+//    private void updateDatabase() {
+//        // Fetch database as json
+//        String str_db = MSPV3
+//                .getMe()
+//                .getString(
+//                        DB_NAME, // key
+//                        DBVal    // def value
+//                );
+//        // Convert json to object
+//        MyDatabase my_db = new Gson()
+//                .fromJson(
+//                        str_db,
+//                        MyDatabase.class
+//                );
+//
+//        DateFormat date = new SimpleDateFormat(DATE_PATTERN);
+//        String tempDate= date.format(Calendar.getInstance().getTime());
+//        // Create a record and store it in my_db
+//        Record record = new Record()
+//                .setDate(tempDate)
+//                .setName(name)
+//                .setLat(lat)
+//                .setLng(lng)
+//                .setScore(scoreCount);
+//
+//        cleanRecordsBelowOneThousandScore(my_db);
+//        my_db.getRecords().add(record);
+//
+//        // Store my_db in app shared preferences
+//        String json = new Gson().toJson(my_db);
+//        MSPV3
+//                .getMe()
+//                .putString(
+//                        DB_NAME,
+//                        json
+//                );
+//    }
+
+    private void cleanRecordsBelowOneThousandScore(@NonNull MyDatabase my_db) {
+        ArrayList<Record> top3 = new ArrayList<>();
+        ArrayList<Record> newRecords = new ArrayList<>();
+        ArrayList<Record> records = my_db.getRecords();
+        for (Record r:
+                records) {
+            if (r.getScore() >= 1000) {
+                newRecords.add(r);
+            }
+        }
+        my_db.setRecords(newRecords);
+    }
+    public void removeButtons() {
+        panel_BTN_left.setVisibility(View.INVISIBLE);
+        panel_BTN_right.setVisibility(View.INVISIBLE);
     }
 }
 

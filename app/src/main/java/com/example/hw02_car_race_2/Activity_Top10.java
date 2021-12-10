@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -15,6 +16,7 @@ public class Activity_Top10 extends AppCompatActivity {
     private Fragment_List fragmentList;
     private Fragment_Map fragmentMap;
     private Button list_BTN_main;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

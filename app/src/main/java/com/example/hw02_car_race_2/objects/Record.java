@@ -1,5 +1,8 @@
 package com.example.hw02_car_race_2.objects;
 
+import android.widget.TextView;
+
+import java.text.DateFormat;
 import java.util.Date;
 
 public class Record {
